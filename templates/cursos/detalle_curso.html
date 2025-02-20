@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block Titulo %} {% curso.nombre %} {% endblock %}
+{% block Contenido %}
+	<div class="card">
+        <div class="card-body">
+            <h2 class="card-tittle">{% curso.nombre %}</h2>
+            <p class="card-text "> {% curso.descripcion %} </p>
+            <ul class="list.group list-group-flush">
+                <li class="list-group-item"><strong>Fecha de Inicio</strong>{% curso.fecha_inicio %}</li>
+                <li class="list-group-item"><strong>Fecha Fin</strong>{% curso.fecha_fin %}</li>
+                <li class="list-group-item"><strong>Cupos disponibles</strong>{% curso.cupos %}</li>
+                <li class="list-group-item"><strong>Estado</strong>{% if curso.estado %}Activo{% else %}Inactivo{% endif %} </li>
+            </ul>
+
+            {% if user.rol == 'user' and curso.estado %}
+            	{% if user in curso.inscritos.all %}
+            		<p class="mt-3 text-success">Ya estas inscrito en este curso</p>
+                {% else %}
+                    <a href="{% url 'inscribir_curso' curso.pk %}">Inscribete ya!</a>
+            	{% endif %}
+            {% endif %}
+            {% if user.rol == 'admin' %}
+            	<h3 class="mt-4">Listado de usuarios inscritos </h3>
+                <table class="table table-striped datatable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usuario in curso.inscritos %}
+                            <tr>
+                            <td>{% usuario.first_name %}</td>
+                            <td>{% usuario.last_name %}</td>
+                            <td>{% usuario.email %}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">No hay usuarios registrados en este curso</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block Titulo %}Crear Curso{% endblock %}
+{% block Contenido %}
+	<div class="card">
+        <div class="card-body">
+            <h2 class="card-tittle">{% if form.instance.pk %}Editar Curso{% else %}Crear Curso{% endif %} </h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                	<div class="mb-3">
+                        <label for="{% field.id_form_label %}" class="form_label">{% field.label %}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                        	<div class="invalid_feedback d-block">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

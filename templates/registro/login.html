@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block Titulo %}Iniciar Sesión{% endblock %}
+
+{% block Contenido %}
+	<div class="row justify-content-center">
+        <di class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h2 class="card-tittle text-center mb-4">Iniciar Sesión</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_username" class="form_label">Nombre de Usuario</label>
+                            <input type="text" class="from_control" name="username" id="id_username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_password" class="form_label">Contraseña</label>
+                            <input type="password" name="password" class="form_password" id="id_password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión </button>
+                        </div>
+                    </form>
+                    <p class="nt-3 text-center">¿No tienes una cuenta?<a href="{% url 'registro' %}">Registrate aqui</a></p>
+                </div>
+            </div>
+        </di>
+    </div>
+{% endblock %}
+{% block JS %}
+    <script>
+        {% if form.errors %}
+        	Swal.fire({
+            title: "Error de inicio de sesión",
+            text: "Usuaro o contraseña incorrecta",
+            icon: "error"
+});
+        {% endif %} 
+    </script>
+{% endblock %}
