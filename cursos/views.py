@@ -13,12 +13,12 @@ from cursos.models import Curso
 
 class ListaCursosView(LoginRequiredMixin, ListView):
     model = Curso
-    template_name = 'cursos/cursos.html'
+    template_name = 'cursos/lista_cursos.html'
 
     context_object_name = 'cursos'
 
     def get_queryset(self):
-        if self.request.user.rol=='admin':
+        if self.request.user.rol == 'admin':
             return Curso.objects.all()
         else:
             return Curso.objects.filter(estado='true')
@@ -47,7 +47,7 @@ class CustomLogoutView(View):
 class Registro_user_view(CreateView):
     form_class = Registro_user_form
     template_name = 'registro/registro.html'
-    success_url = reverse_lazy('cursos/cursos.html')
+    success_url = reverse_lazy('cursos/lista_cursos.html')
 
     def form_valid(self, form):
         response=super().form_valid(form)
@@ -82,7 +82,7 @@ class CrearCursoView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Curso
     form_class = Curso_form
     template_name = 'cursos/form_curso.html'
-    success_url = reverse_lazy('cursos/cursos.html')
+    success_url = reverse_lazy('cursos/lista_cursos.html')
 
     def test_func(self):
         return self.request.user.rol=='admin'
@@ -95,7 +95,7 @@ class CrearCursoView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class MisCursosView(LoginRequiredMixin, ListView):
     model = Curso
-    template_name = 'cursos/cursos.html'
+    template_name = 'cursos/lista_cursos.html'
     context_object_name = 'cursos'
 
     def get_queryset(self):

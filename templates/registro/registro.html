@@ -37,7 +37,7 @@
                 Swal.fire({
                    icon: '{% if mesage.tags == "Error" %}erro {% else %}Success{% endif %} ',
                    title: '{% if mesage.tags == "Error" %}erro {% else %}Success{% endif %} ',
-                   text: "{% message %}",
+                   text: "{{ message }}",
                    {% if message.tag != "error" %}
                        showConfirmButton: false,
                        timer: 1500

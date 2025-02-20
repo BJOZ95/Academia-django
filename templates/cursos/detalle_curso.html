@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-{% block Titulo %} {% curso.nombre %} {% endblock %}
+{% block Titulo %} {{ curso.nombre }} {% endblock %}
 {% block Contenido %}
 	<div class="card">
         <div class="card-body">
-            <h2 class="card-tittle">{% curso.nombre %}</h2>
-            <p class="card-text "> {% curso.descripcion %} </p>
+            <h2 class="card-tittle">{{ curso.nombre }}</h2>
+            <p class="card-text "> {{ curso.descripcion }} </p>
             <ul class="list.group list-group-flush">
-                <li class="list-group-item"><strong>Fecha de Inicio</strong>{% curso.fecha_inicio %}</li>
-                <li class="list-group-item"><strong>Fecha Fin</strong>{% curso.fecha_fin %}</li>
-                <li class="list-group-item"><strong>Cupos disponibles</strong>{% curso.cupos %}</li>
+                <li class="list-group-item"><strong>Fecha de Inicio</strong>{{ curso.fecha_inicio }}</li>
+                <li class="list-group-item"><strong>Fecha Fin</strong>{{ curso.fecha_fin }}</li>
+                <li class="list-group-item"><strong>Cupos disponibles</strong>{{ curso.cupos }}</li>
                 <li class="list-group-item"><strong>Estado</strong>{% if curso.estado %}Activo{% else %}Inactivo{% endif %} </li>
             </ul>
 
@@ -32,9 +32,9 @@
                     <tbody>
                         {% for usuario in curso.inscritos %}
                             <tr>
-                            <td>{% usuario.first_name %}</td>
-                            <td>{% usuario.last_name %}</td>
-                            <td>{% usuario.email %}</td>
+                            <td>{{ usuario.first_name }}</td>
+                            <td>{{ usuario.last_name }}</td>
+                            <td>{{ usuario.email }}</td>
                             </tr>
                         {% empty %}
                             <tr>

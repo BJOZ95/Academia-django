@@ -14,16 +14,16 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'cursos.html'  %}">Academia</a>
-            <button class="navbar-toggler" type="buttom" data-bs-toggle="collapse" data-bs-target="navbarNav" aria-controls="navbavNav" aria-expanded="false" aria-label="Toggle navigation">
-                <spam class="navbar-toggler-icon"></spam>
+            <a class="navbar-brand" href="{% url 'lista_cursos' %}">Bienvenido, {{ user.first_name }} {{ user.last_name }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarNav" aria-controls="navbavNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
             <!--lista de opciones-->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-items">
-                            <a href="{% url 'cursos' %}" class="nav-link">Cursos</a>
+                            <a href="{% url 'lista_cursos' %}" class="nav-link">Cursos</a>
                         </li>
                         <li class="nav-items">
                             <a href="{% url 'mis_cursos' %}" class="nav-link">Mis Cursos</a>
@@ -31,6 +31,10 @@
                         {% if user.rol == 'admin' %}
                         	<a href="{% url 'crear_cursos' %}" class="nav-link">Crear Cursos</a>
                         {% endif %}
+                        <li class="nav-items">
+                            <a href="{% url 'logout' %}" class="nav-link">Cerrar Sesion</a>
+                        </li>
+
                     {% else %}
                         <li class="nav-items">
                             <a href="{% url 'login' %}" class="nav-link">Iniciar Sesión</a>

@@ -8,7 +8,7 @@
                 {% csrf_token %}
                 {% for field in form %}
                 	<div class="mb-3">
-                        <label for="{% field.id_form_label %}" class="form_label">{% field.label %}</label>
+                        <label for="{{ field.id_form_label }}" class="form_label">{{ field.label }}</label>
                         {{ field }}
                         {% if field.errors %}
                         	<div class="invalid_feedback d-block">
